@@ -68,13 +68,15 @@ Page {
                 text: "Download"
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                onClicked: network.httpConnect()
+                onClicked: network.httpConnect("dog")
             }
 
             Label {
                 text: network.answer
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 14
+                textFormat: Text.RichText
+                wrapMode: Text.WordWrap
+                anchors { left: parent.left; right: parent.right; margins: Theme.horizontalPageMargin }
+                font.pixelSize: 32
             }
         }
     }

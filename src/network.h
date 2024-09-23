@@ -8,11 +8,11 @@
 class Network : public QObject
 {
     Q_OBJECT
-     Q_PROPERTY(QString answer READ getAnswer NOTIFY answerChanged)
+    Q_PROPERTY(QString answer READ getAnswer NOTIFY answerChanged)
 
 public:
     Q_INVOKABLE Network();
-    Q_INVOKABLE void httpConnect();
+    Q_INVOKABLE void httpConnect(QString searchWord);
     QString getAnswer();
 
 private:

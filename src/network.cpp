@@ -13,9 +13,9 @@ QString Network::getAnswer() {
     return this->_answer;
 }
 
-void Network::httpConnect(){
+void Network::httpConnect(QString searchWord){
 
-    QString _url = "https://api.giphy.com/v1/gifs/search?api_key=UUf3cd49L8HLBEb9njVcXLuzUtbWTSnF&limit=1&q=cat";
+    QString _url = "https://api.giphy.com/v1/gifs/search?api_key=UUf3cd49L8HLBEb9njVcXLuzUtbWTSnF&limit=3&q=" + searchWord;
 
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
 
@@ -31,20 +31,29 @@ void Network::httpConnect(){
                          }
 
                          QString answer = reply->readAll();
-                         _answer = answer;
-                         emit answerChanged();
-
                          QByteArray json_bytes = answer.toLocal8Bit();
-                         auto jsonDocument = QJsonDocument::fromJson(json_bytes);
-                         auto json_obj=jsonDocument.object();
+                         QJsonDocument jsonDocument = QJsonDocument::fromJson(json_bytes);
+                         QJsonObject json_obj=jsonDocument.object();
 
-                         QVariantList timeArray = json_obj.toVariantMap()["hourly"].toJsonObject().toVariantMap()["time"].toList();
-                         QVariantList temperatureArray = json_obj.toVariantMap()["hourly"].toJsonObject().toVariantMap()["temperature_180m"].toList();
-                         QVariantList precipitationProbabilityArray = json_obj.toVariantMap()["hourly"].toJsonObject().toVariantMap()["precipitation_probability"].toList();
+                         QJsonArray jsonArray;
+                         foreach(QJsonValue v, json_obj["data"].toArray()){
+                             QJsonObject jsonItemObj = v.toObject();
+                             QJsonObject newJsonItemObj;
+                             newJsonItemObj["id"] = jsonItemObj["id"].toString();
+                             newJsonItemObj["url"] = jsonItemObj["url"].toString();
+                             newJsonItemObj["username"] = jsonItemObj["username"].toString();
+                             newJsonItemObj["title"] = jsonItemObj["title"].toString();
+                             newJsonItemObj["image"] =  jsonItemObj["images"].toObject()["downsized"].toObject()["url"].toString();
+                             jsonArray.append(newJsonItemObj);
+                         }
+                         auto a = QJsonDocument(jsonArray);
+                         QString strFromObj = QJsonDocument(a).toJson(QJsonDocument::Compact).toStdString().c_str();
+                         qDebug() << strFromObj;
 
-
+                         _answer = strFromObj;
+                         emit answerChanged();
                      });
 
-    request.setUrl(QUrl("https://api.open-meteo.com/v1/forecast?latitude=55.7522&longitude=37.6156&hourly=temperature_180m,precipitation_probability,precipitation"));
+    request.setUrl(QUrl(_url));
     manager->get(request);
 }
