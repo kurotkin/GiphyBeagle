@@ -7,6 +7,8 @@ Page {
     objectName: "mainPage"
     allowedOrientations: Orientation.All
 
+    Dao{id: dao}
+
     Counter {
         id: counter
         count: 15
@@ -14,6 +16,14 @@ Page {
 
     Network {
         id: network
+        answerChanged: {
+            jsonModel.source = network.answer
+        }
+    }
+
+    JSONListModel {
+        id: jsonModel
+        source: network.answer
     }
 
 
@@ -30,6 +40,7 @@ Page {
             }
         ]
     }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -38,6 +49,24 @@ Page {
             id: column
             width: page.width
             spacing: Theme.paddingLarge
+
+            Label {
+                text: " "
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 32
+            }
+
+            TextArea {
+                id: searchArea
+                placeholderText: "Поиск"
+                label: "Поиск"
+            }
+
+            Button {
+                text: "Найти"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: network.httpConnect(searchArea.text)
+            }
 
             Label {
                 text: "Счётчик"
@@ -64,19 +93,29 @@ Page {
 
                 onClicked: counter.reset()
             }
-            Button {
-                text: "Download"
-                anchors.horizontalCenter: parent.horizontalCenter
 
-                onClicked: network.httpConnect("dog")
-            }
-
-            Label {
-                text: network.answer
-                textFormat: Text.RichText
-                wrapMode: Text.WordWrap
-                anchors { left: parent.left; right: parent.right; margins: Theme.horizontalPageMargin }
-                font.pixelSize: 32
+            SilicaListView {
+                model: jsonModel
+                delegate: ListItem {
+                    contentHeight: Theme.itemSizeExtraLarge
+                    Column{
+                        anchors {
+                            left: parent.left
+                            leftMargin: Theme.horizontalPageMargin
+                            right: parent.right
+                            rightMargin: Theme.horizontalPageMargin
+                        }
+                        Label {
+                            text: url
+                        }
+                        Label {
+                            text: username
+                        }
+                        Label {
+                            text: title
+                        }
+                    }
+                }
             }
         }
     }

@@ -17,6 +17,9 @@ HEADERS += \
     src/network.h
 
 DISTFILES += \
+    qml/pages/Dao.qml \
+    qml/pages/JSONListModel.qml \
+    qml/pages/jsonPath.js \
     rpm/com.kurotkin.GiphyBeagle.spec \
 
 AURORAAPP_ICONS = 86x86 108x108 128x128 172x172

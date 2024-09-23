@@ -42,7 +42,7 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="22"/>
+        <location filename="../qml/pages/MainPage.qml" line="29"/>
         <source>GiphyBeagle</source>
         <translation type="unfinished">Поиск по картинкам</translation>
     </message>
