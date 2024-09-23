@@ -1,13 +1,13 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Icon=ru.template.GiphyBeagle
-Exec=/usr/bin/ru.template.GiphyBeagle
+Icon=com.kurotkin.GiphyBeagle
+Exec=/usr/bin/com.kurotkin.GiphyBeagle
 Name=GiphyBeagle
 Name[ru]=Поиск по картинкам
 
 [X-Application]
 Permissions=Internet;Pictures;WebView
-OrganizationName=ru.template
+OrganizationName=com.kurotkin
 ApplicationName=GiphyBeagle
-ExecDBus=/usr/bin/ru.template.GiphyBeagle
+ExecDBus=/usr/bin/com.kurotkin.GiphyBeagle

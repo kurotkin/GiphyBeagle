@@ -1,4 +1,4 @@
-Name:       ru.template.GiphyBeagle
+Name:       com.kurotkin.GiphyBeagle
 Summary:    Моё приложение для ОС Аврора
 Version:    0.1
 Release:    1

@@ -1,4 +1,4 @@
-TARGET = ru.template.GiphyBeagle
+TARGET = com.kurotkin.GiphyBeagle
 
 QT += network
 
@@ -17,12 +17,12 @@ HEADERS += \
     src/network.h
 
 DISTFILES += \
-    rpm/ru.template.GiphyBeagle.spec \
+    rpm/com.kurotkin.GiphyBeagle.spec \
 
 AURORAAPP_ICONS = 86x86 108x108 128x128 172x172
 
 CONFIG += auroraapp_i18n
 
 TRANSLATIONS += \
-    translations/ru.template.GiphyBeagle.ts \
-    translations/ru.template.GiphyBeagle-ru.ts \
+    translations/com.kurotkin.GiphyBeagle.ts \
+    translations/com.kurotkin.GiphyBeagle-ru.ts \

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.1" language="en">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="20"/>
         <source>About Application</source>
-        <translation>О приложении</translation>
+        <translation>About Application</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="30"/>
@@ -16,12 +16,12 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="35"/>
         <source>3-Clause BSD License</source>
-        <translation>Лицензия 3-Clause BSD</translation>
+        <translation>3-Clause BSD License</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="45"/>
         <source>#licenseText</source>
-        <translation>&lt;p&gt;&lt;i&gt;Copyright (C) 2022 ru.template&lt;/i&gt;&lt;/p&gt;
+        <translation>&lt;p&gt;&lt;i&gt;Copyright (C) 2022 com.kurotkin&lt;/i&gt;&lt;/p&gt;
 &lt;p&gt;Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:&lt;/p&gt;
 &lt;ol&gt;
 	&lt;li&gt;Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.&lt;/li&gt;
@@ -36,7 +36,7 @@
     <message>
         <location filename="../qml/cover/DefaultCoverPage.qml" line="10"/>
         <source>GiphyBeagle</source>
-        <translation>Поиск по картинкам</translation>
+        <translation>GiphyBeagle</translation>
     </message>
 </context>
 <context>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../qml/pages/MainPage.qml" line="22"/>
         <source>GiphyBeagle</source>
-        <translation type="unfinished">Поиск по картинкам</translation>
+        <translation type="unfinished">GiphyBeagle</translation>
     </message>
 </context>
 </TS>
