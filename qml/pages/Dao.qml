@@ -5,20 +5,20 @@ QtObject {
     id: root
     property var db
 
-    function selectImage(callback) {
+    function selectImages(callback) {
         db.readTransaction(function (tx) {
             var result = tx.executeSql("SELECT * FROM images;");
             callback(result.rows);
         });
     }
 
-    function insertNote(id, url, username, title, image_url) {
+    function insertImage(id, url, username, title, image_url) {
         db.transaction(function (tx) {
             tx.executeSql("INSERT INTO images (id, url, username, title, image_url) VALUES(?, ?, ?, ?, ?);", [id, url, username, title, image_url]);
         });
     }
 
-    function deleteNote(id) {
+    function deleteImage(id) {
         db.transaction(function (tx) {
             tx.executeSql("DELETE FROM images WHERE id = ?;", [id]);
         });

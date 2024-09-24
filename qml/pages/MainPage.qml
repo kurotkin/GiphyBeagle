@@ -7,12 +7,14 @@ Page {
     objectName: "mainPage"
     allowedOrientations: Orientation.All
 
-    Dao{id: dao}
+    Dao{ id: dao }
 
     Counter {
         id: counter
         count: 15
     }
+
+    CopyUtil{ id: copyUtil }
 
     Network {
         id: network
@@ -27,71 +29,116 @@ Page {
                     title:data[i].title,
                     image: data[i].image
                 };
+                console.log(data[i].image)
                 dataModel.append(a);
             }
         }
     }
 
+
+
     SilicaListView {
-       anchors.fill: parent
-       header:PageHeader {
-           objectName: "pageHeader"
-           title: qsTr("GiphyBeagle")
-           extraContent.children: [
-               IconButton {
-                   objectName: "aboutButton"
-                   icon.source: "image://theme/icon-m-about"
-                   anchors.verticalCenter: parent.verticalCenter
-                   onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-               }
+        anchors{
+            fill: parent
+            rightMargin: 25
+            leftMargin: 25
+        }
 
-           ]
-           Column {
-               id: column
-               width: page.width
-               spacing: Theme.paddingLarge
+        header: Column{
+            anchors{
+                top: parent
+                left: parent
+                right: parent
+            }
 
-               Label {
-                   text: " "
-                   anchors.horizontalCenter: parent.horizontalCenter
-                   font.pixelSize: 64
-               }
+            width: parent.width
+            height: header.height + mainColumn.height + searchArea.height + fButton.height + Theme.paddingLarge * 2
+            PageHeader {
+                id: header
+                objectName: "pageHeader"
+                title: qsTr("GiphyBeagle")
+                extraContent.children: [
+                IconButton {
+                    objectName: "aboutButton"
+                    icon.source: "image://theme/icon-m-about"
+                    anchors.verticalCenter: parent.verticalCenter
+                    onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+                }]
 
-               TextArea {
-                   id: searchArea
-                   placeholderText: "Поиск"
-                   label: "Поиск"
-                   text: "cat"
-               }
+                Column{
+                    id: mainColumn
+                    anchors{
+                        top: header.bottom
+                        margins: 20
+                    }
+                    width: parent.width
+                    spacing: Theme.paddingLarge
+                    TextArea {
+                        id: searchArea
+                        width: parent.width
+                        placeholderText: "Поиск"
+                        label: "Поиск"
+                        text: "cat"
+                    }
+                    Row{
+                        anchors{
+                            horizontalCenter: parent.horizontalCenter
+                            top: searchArea.bottom
+                            left: parent
+                            right: parent
+                        }
+                        Button {
+                            anchors.margins: 20
+                            id:fButton
+                            text: "Найти"
+                            onClicked: network.httpConnect(searchArea.text)
+                        }
+                        Button {
+                            anchors.margins: 20
+                            id:favButton
+                            text: "Избранные"
+                            onClicked: pageStack.push(Qt.resolvedUrl("FavoritesPage.qml"))
+                        }
+                    }
+                }
+             }
 
-               Button {
-                   id:fButton
-                   text: "Найти"
-                   anchors.horizontalCenter: parent.horizontalCenter
-                   onClicked: network.httpConnect(searchArea.text)
-               }
+      }
 
 
-           }
-       }
        model: ListModel { id: dataModel }
        delegate: ListItem {
-            contentHeight: Theme.itemSizeExtraLarge
+            contentHeight: im.height + 80
             Column{
-                height: 250
+                Label {
+                   text: title
+                }
                 Image {
+                    id: im
                     source: image
                     width: sourceSize.width
                     height: sourceSize.height
                 }
-                Label {
-                   text: username
-                }
-                Label {
-                   text: title
-                }
              }
+            menu: ContextMenu {
+                MenuItem {
+                    text: "Добавить в избранное"
+                    onClicked: {
+                        dao.insertImage(id, url, username, title, image);
+                    }
+                }
+                MenuItem {
+                    text: "Скопировать Url"
+                    onClicked: {
+                        copyUtil.copyText(image)
+                    }
+                }
+            }
+            onClicked: {
+                pageStack.push("ImageDialog.qml", {"img": image, "title": title});
+            }
         }
+       VerticalScrollDecorator{}
     }
 
 }

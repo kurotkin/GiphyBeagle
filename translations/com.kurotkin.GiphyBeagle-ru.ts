@@ -40,9 +40,17 @@
     </message>
 </context>
 <context>
+    <name>FavoritesPage</name>
+    <message>
+        <location filename="../qml/pages/FavoritesPage.qml" line="21"/>
+        <source>Избранные</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="39"/>
+        <location filename="../qml/pages/MainPage.qml" line="59"/>
         <source>GiphyBeagle</source>
         <translation type="unfinished">Поиск по картинкам</translation>
     </message>

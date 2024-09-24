@@ -17,7 +17,10 @@ HEADERS += \
     src/network.h
 
 DISTFILES += \
+    qml/pages/CopyUtil.qml \
     qml/pages/Dao.qml \
+    qml/pages/FavoritesPage.qml \
+    qml/pages/ImageDialog.qml \
     rpm/com.kurotkin.GiphyBeagle.spec \
 
 AURORAAPP_ICONS = 86x86 108x108 128x128 172x172
