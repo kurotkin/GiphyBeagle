@@ -9,8 +9,8 @@ Dialog {
 
     DialogHeader {
         id: header
-        acceptText: "Скопировать"
-        cancelText: "Назад"
+        acceptText: qrTs("Copy Url")
+        cancelText: qrTs("Back")
     }
 
     AnimatedImage {

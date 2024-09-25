@@ -30,15 +30,15 @@ Page {
             PageHeader {
                 id: header
                 height: header.height + searchArea.height
-                title: qsTr("Избранные")
+                title: qsTr("Favorites")
                 TextField {
                     anchors{
                         top: header.bottom
                     }
                     id: searchArea
                     width: parent.width
-                    placeholderText: "Поиск"
-                    label: "Поиск"
+                    placeholderText: qrTs("Search")
+                    label: qrTs("Search")
                     onTextChanged: {
                         searchText(searchArea.text)
                     }
@@ -62,14 +62,14 @@ Page {
             }
             menu: ContextMenu {
                 MenuItem {
-                    text: "Убрать из избранного"
+                    text: qrTs("Remove from favorites")
                     onClicked: {
                         dao.deleteImage(id);
                         selectImages();
                     }
                 }
                 MenuItem {
-                    text: "Скопировать Url"
+                    text: qrTs("Copy Url")
                     onClicked: {
                         copyUtil.copyText(image)
                     }

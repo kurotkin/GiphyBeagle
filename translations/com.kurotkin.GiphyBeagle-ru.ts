@@ -43,7 +43,7 @@
     <name>FavoritesPage</name>
     <message>
         <location filename="../qml/pages/FavoritesPage.qml" line="33"/>
-        <source>Избранные</source>
+        <source>Favorites</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

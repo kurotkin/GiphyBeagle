@@ -76,8 +76,8 @@ Page {
                     TextArea {
                         id: searchArea
                         width: parent.width
-                        placeholderText: "Поиск"
-                        label: "Поиск"
+                        placeholderText: qrTs("Search")
+                        label: qrTs("Search")
                         Component.onCompleted: {
                             searchArea.text = getRand();
                         }
@@ -93,13 +93,13 @@ Page {
                         Button {
                             anchors.margins: 5
                             id:fButton
-                            text: "Найти"
+                            text: qrTs("Search")
                             onClicked: network.httpConnect(searchArea.text)
                         }
                         Button {
                             anchors.margins: 5
                             id:randButton
-                            text: "Случайно"
+                            text:qrTs("Accidentally")
                             onClicked: {
                                 searchArea.text = randUtil.getRandImage();
                                 network.httpConnect(searchArea.text)
@@ -126,13 +126,13 @@ Page {
             }
             menu: ContextMenu {
                 MenuItem {
-                    text: "Добавить в избранное"
+                    text: qrTs("Add to Favorites")
                     onClicked: {
                         dao.insertImage(id, url, username, title, image);
                     }
                 }
                 MenuItem {
-                    text: "Скопировать Url"
+                    text: qrTs("Copy Url")
                     onClicked: {
                         copyUtil.copyText(image)
                     }
