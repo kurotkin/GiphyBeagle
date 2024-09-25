@@ -11,7 +11,7 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="30"/>
         <source>#descriptionText</source>
-        <translation>&lt;p&gt;Короткое описание моего приложения для ОС Аврора&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Animated picture receiving application&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="35"/>
@@ -44,7 +44,36 @@
     <message>
         <location filename="../qml/pages/FavoritesPage.qml" line="33"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation">Favorites</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FavoritesPage.qml" line="40"/>
+        <location filename="../qml/pages/FavoritesPage.qml" line="41"/>
+        <source>Search</source>
+        <translation>Search</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FavoritesPage.qml" line="65"/>
+        <source>Remove from favorites</source>
+        <translation>Remove from favorites</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FavoritesPage.qml" line="72"/>
+        <source>Copy Url</source>
+        <translation>Copy Url</translation>
+    </message>
+</context>
+<context>
+    <name>ImageDialog</name>
+    <message>
+        <location filename="../qml/pages/ImageDialog.qml" line="12"/>
+        <source>Copy Url</source>
+        <translation>Copy Url</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImageDialog.qml" line="13"/>
+        <source>Back</source>
+        <translation>Back</translation>
     </message>
 </context>
 <context>
@@ -52,7 +81,29 @@
     <message>
         <location filename="../qml/pages/MainPage.qml" line="49"/>
         <source>GiphyBeagle</source>
-        <translation type="unfinished">GiphyBeagle</translation>
+        <translation>GiphyBeagle</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="80"/>
+        <location filename="../qml/pages/MainPage.qml" line="81"/>
+        <location filename="../qml/pages/MainPage.qml" line="97"/>
+        <source>Search</source>
+        <translation>Search</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="103"/>
+        <source>Accidentally</source>
+        <translation>Accidentally</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="130"/>
+        <source>Add to Favorites</source>
+        <translation>Add to Favorites</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="136"/>
+        <source>Copy Url</source>
+        <translation>Copy Url</translation>
     </message>
 </context>
 </TS>

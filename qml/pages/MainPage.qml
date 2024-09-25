@@ -75,9 +75,10 @@ Page {
                     spacing: Theme.paddingLarge
                     TextArea {
                         id: searchArea
+                        objectName: "searchArea"
                         width: parent.width
-                        placeholderText: qrTs("Search")
-                        label: qrTs("Search")
+                        placeholderText: qsTr("Search")
+                        label: qsTr("Search")
                         Component.onCompleted: {
                             searchArea.text = getRand();
                         }
@@ -93,13 +94,13 @@ Page {
                         Button {
                             anchors.margins: 5
                             id:fButton
-                            text: qrTs("Search")
+                            text: qsTr("Search")
                             onClicked: network.httpConnect(searchArea.text)
                         }
                         Button {
                             anchors.margins: 5
                             id:randButton
-                            text:qrTs("Accidentally")
+                            text:qsTr("Accidentally")
                             onClicked: {
                                 searchArea.text = randUtil.getRandImage();
                                 network.httpConnect(searchArea.text)
@@ -126,13 +127,13 @@ Page {
             }
             menu: ContextMenu {
                 MenuItem {
-                    text: qrTs("Add to Favorites")
+                    text: qsTr("Add to Favorites")
                     onClicked: {
                         dao.insertImage(id, url, username, title, image);
                     }
                 }
                 MenuItem {
-                    text: qrTs("Copy Url")
+                    text: qsTr("Copy Url")
                     onClicked: {
                         copyUtil.copyText(image)
                     }

@@ -37,8 +37,8 @@ Page {
                     }
                     id: searchArea
                     width: parent.width
-                    placeholderText: qrTs("Search")
-                    label: qrTs("Search")
+                    placeholderText: qsTr("Search")
+                    label: qsTr("Search")
                     onTextChanged: {
                         searchText(searchArea.text)
                     }
@@ -62,14 +62,14 @@ Page {
             }
             menu: ContextMenu {
                 MenuItem {
-                    text: qrTs("Remove from favorites")
+                    text: qsTr("Remove from favorites")
                     onClicked: {
                         dao.deleteImage(id);
                         selectImages();
                     }
                 }
                 MenuItem {
-                    text: qrTs("Copy Url")
+                    text: qsTr("Copy Url")
                     onClicked: {
                         copyUtil.copyText(image)
                     }
