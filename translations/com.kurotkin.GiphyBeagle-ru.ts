@@ -42,7 +42,7 @@
 <context>
     <name>FavoritesPage</name>
     <message>
-        <location filename="../qml/pages/FavoritesPage.qml" line="21"/>
+        <location filename="../qml/pages/FavoritesPage.qml" line="33"/>
         <source>Избранные</source>
         <translation type="unfinished"></translation>
     </message>
@@ -50,7 +50,7 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="59"/>
+        <location filename="../qml/pages/MainPage.qml" line="49"/>
         <source>GiphyBeagle</source>
         <translation type="unfinished">Поиск по картинкам</translation>
     </message>

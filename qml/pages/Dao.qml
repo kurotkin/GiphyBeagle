@@ -12,6 +12,13 @@ QtObject {
         });
     }
 
+    function searchImages(txt, callback) {
+        db.readTransaction(function (tx) {
+            var result = tx.executeSql("SELECT * FROM images WHERE title LIKE ?;", [txt]);
+            callback(result.rows);
+        });
+    }
+
     function insertImage(id, url, username, title, image_url) {
         db.transaction(function (tx) {
             tx.executeSql("INSERT INTO images (id, url, username, title, image_url) VALUES(?, ?, ?, ?, ?);", [id, url, username, title, image_url]);

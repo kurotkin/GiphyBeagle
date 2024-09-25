@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import custom.Counter 1.0
 import custom.Network 1.0
 
 Page {
@@ -8,13 +7,8 @@ Page {
     allowedOrientations: Orientation.All
 
     Dao{ id: dao }
-
-    Counter {
-        id: counter
-        count: 15
-    }
-
     CopyUtil{ id: copyUtil }
+    RandUtil{ id: randUtil}
 
     Network {
         id: network
@@ -29,13 +23,10 @@ Page {
                     title:data[i].title,
                     image: data[i].image
                 };
-                console.log(data[i].image)
                 dataModel.append(a);
             }
         }
     }
-
-
 
     SilicaListView {
         anchors{
@@ -43,7 +34,6 @@ Page {
             rightMargin: 25
             leftMargin: 25
         }
-
         header: Column{
             anchors{
                 top: parent
@@ -52,24 +42,34 @@ Page {
             }
 
             width: parent.width
-            height: header.height + mainColumn.height + searchArea.height + fButton.height + Theme.paddingLarge * 2
+            height: header.height + mainColumn.height + searchArea.height + row.height + Theme.paddingLarge * 2
             PageHeader {
                 id: header
                 objectName: "pageHeader"
                 title: qsTr("GiphyBeagle")
                 extraContent.children: [
-                IconButton {
-                    objectName: "aboutButton"
-                    icon.source: "image://theme/icon-m-about"
-                    anchors.verticalCenter: parent.verticalCenter
-                    onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-                }]
+                    IconButton {
+                        id: aboutButton
+                        objectName: "aboutButton"
+                        icon.source: "image://theme/icon-m-about"
+                        anchors.verticalCenter: parent.verticalCenter
+                        onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+                    },
+                    IconButton {
+                        objectName: "favoritesButton"
+                        icon.source: "image://theme/icon-m-favorite"
+                        anchors{
+                            verticalCenter: parent.verticalCenter
+                            left: aboutButton.right
+                        }
+                        onClicked: pageStack.push(Qt.resolvedUrl("FavoritesPage.qml"))
+                    }]
 
                 Column{
                     id: mainColumn
                     anchors{
                         top: header.bottom
-                        margins: 20
+                        margins: 5
                     }
                     width: parent.width
                     spacing: Theme.paddingLarge
@@ -78,9 +78,12 @@ Page {
                         width: parent.width
                         placeholderText: "Поиск"
                         label: "Поиск"
-                        text: "cat"
+                        Component.onCompleted: {
+                            searchArea.text = getRand();
+                        }
                     }
                     Row{
+                        id: row
                         anchors{
                             horizontalCenter: parent.horizontalCenter
                             top: searchArea.bottom
@@ -88,38 +91,39 @@ Page {
                             right: parent
                         }
                         Button {
-                            anchors.margins: 20
+                            anchors.margins: 5
                             id:fButton
                             text: "Найти"
                             onClicked: network.httpConnect(searchArea.text)
                         }
                         Button {
-                            anchors.margins: 20
-                            id:favButton
-                            text: "Избранные"
-                            onClicked: pageStack.push(Qt.resolvedUrl("FavoritesPage.qml"))
+                            anchors.margins: 5
+                            id:randButton
+                            text: "Случайно"
+                            onClicked: {
+                                searchArea.text = randUtil.getRandImage();
+                                network.httpConnect(searchArea.text)
+                            }
                         }
                     }
                 }
-             }
+            }
 
-      }
-
-
-       model: ListModel { id: dataModel }
-       delegate: ListItem {
+        }
+        model: ListModel { id: dataModel }
+        delegate: ListItem {
             contentHeight: im.height + 80
             Column{
                 Label {
-                   text: title
+                    text: title
                 }
-                Image {
+                AnimatedImage {
                     id: im
                     source: image
                     width: sourceSize.width
                     height: sourceSize.height
                 }
-             }
+            }
             menu: ContextMenu {
                 MenuItem {
                     text: "Добавить в избранное"
@@ -138,7 +142,6 @@ Page {
                 pageStack.push("ImageDialog.qml", {"img": image, "title": title});
             }
         }
-       VerticalScrollDecorator{}
+        VerticalScrollDecorator{}
     }
-
 }

@@ -8,12 +8,10 @@ CONFIG += \
 PKGCONFIG += \
 
 SOURCES += \
-    src/counter.cpp \
     src/main.cpp \
     src/network.cpp
 
 HEADERS += \
-    src/counter.h \
     src/network.h
 
 DISTFILES += \
@@ -21,6 +19,7 @@ DISTFILES += \
     qml/pages/Dao.qml \
     qml/pages/FavoritesPage.qml \
     qml/pages/ImageDialog.qml \
+    qml/pages/RandUtil.qml \
     rpm/com.kurotkin.GiphyBeagle.spec \
 
 AURORAAPP_ICONS = 86x86 108x108 128x128 172x172

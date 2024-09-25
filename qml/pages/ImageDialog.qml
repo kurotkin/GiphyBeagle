@@ -13,7 +13,7 @@ Dialog {
         cancelText: "Назад"
     }
 
-    Image {
+    AnimatedImage {
         id: im
         source: img
         anchors.fill: parent

@@ -5,6 +5,8 @@ Page {
     objectName: "favoritesPage"
     allowedOrientations: Orientation.All
 
+    property bool searchStat: false
+
     Dao{id: dao}
 
     CopyUtil{
@@ -17,27 +19,47 @@ Page {
             rightMargin: 25
             leftMargin: 25
         }
+        header: Column{
+            anchors{
+                top: parent
+                left: parent
+                right: parent
+            }
+            width: parent.width
+            height: header.height + searchArea.height
+            PageHeader {
+                id: header
+                height: header.height + searchArea.height
+                title: qsTr("Избранные")
+                TextField {
+                    anchors{
+                        top: header.bottom
+                    }
+                    id: searchArea
+                    width: parent.width
+                    placeholderText: "Поиск"
+                    label: "Поиск"
+                    onTextChanged: {
+                        searchText(searchArea.text)
+                    }
+                }
+            }
 
-        header: PageHeader { title: qsTr("Избранные") }
-
-
-       model: ListModel { id: dataModel }
-       delegate: ListItem {
+        }
+        model: ListModel { id: dataModel }
+        delegate: ListItem {
             contentHeight: im.height + 80
             Column{
                 Label {
-                   text: username
+                    text: title
                 }
-                Label {
-                   text: title
-                }
-                Image {
+                AnimatedImage {
                     id: im
                     source: image
                     width: sourceSize.width
                     height: sourceSize.height
                 }
-             }
+            }
             menu: ContextMenu {
                 MenuItem {
                     text: "Убрать из избранного"
@@ -54,10 +76,22 @@ Page {
                 }
             }
             onClicked: {
-                 pageStack.push("ImageDialog.qml", {"img": image, "title": title});
+                pageStack.push("ImageDialog.qml", {"img": image, "title": title});
             }
         }
-       VerticalScrollDecorator{}
+        VerticalScrollDecorator{}
+    }
+
+    function searchText(txt){
+        if(txt.length > 2){
+            searchImages(txt)
+            searchStat = true
+        } else {
+            if(searchStat == true){
+                searchStat = false
+                selectImages()
+            }
+        }
     }
 
     function selectImages() {
@@ -72,7 +106,26 @@ Page {
                     image: images.item(i).image_url
                 };
                 dataModel.append(a);
-             }
+            }
+        });
+    }
+
+    function searchImages(txt) {
+        dataModel.clear();
+        dao.selectImages(function (images) {
+            for (var i = 0; i < images.length; i++) {
+                var title = "" + images.item(i).title;
+                if(title.indexOf(txt) >= 0){
+                    var a = {
+                        id: images.item(i).id,
+                        url: images.item(i).url,
+                        username: images.item(i).username,
+                        title: images.item(i).title,
+                        image: images.item(i).image_url
+                    };
+                    dataModel.append(a);
+                }
+            }
         });
     }
 
